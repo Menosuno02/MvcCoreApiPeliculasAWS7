@@ -9,10 +9,9 @@ namespace MvcCoreApiPeliculasAWS7.Services
         private string UrlApi;
         private MediaTypeWithQualityHeaderValue header;
 
-        public ServiceApiPeliculas(IConfiguration configuration)
+        public ServiceApiPeliculas(KeysModel keys)
         {
-            this.UrlApi = configuration.GetValue<string>
-                ("ApiUrls:ApiPeliculasAWS");
+            this.UrlApi = keys.ApiPeliculas;
             this.header = new MediaTypeWithQualityHeaderValue
                 ("application/json");
         }
@@ -45,7 +44,7 @@ namespace MvcCoreApiPeliculasAWS7.Services
             return data;
         }
 
-        public async Task<List<Pelicula>> 
+        public async Task<List<Pelicula>>
             GetPeliculasActoresAsync(string actor)
         {
             string request = "api/peliculas/find/" + actor;
@@ -54,7 +53,7 @@ namespace MvcCoreApiPeliculasAWS7.Services
             return data;
         }
 
-        public async Task<Pelicula> 
+        public async Task<Pelicula>
             FindPelicula(int id)
         {
             string request = "api/peliculas/" + id;
